@@ -1,23 +1,11 @@
-// const express = require("express");
-// const server = express();
-// const cors = require("cors")
-// server.use(cors());
-// server.get("/cat-msg", (req, res) => {
-//     const obj = { author: "cat", message: "meow" };
-//     // res.obj = { author: "cat", message: "meow" };
-    
-//     setTimeout(()=>{
-//         res.status(200).json(obj);
-//     })
-// })
-// const port = 8080
-// server.listen(port, () => console.log("port running"))
 const express = require("express");
-const cors = require("cors")
-
+const cors = require("cors");
+const {clients} = require("./data/client")
+const {words} = require("./data/words")
 // create Express server
 const server = express();
 server.use(cors());
+server.use(express.json())
 server.get("/cat-message",(req,res)=>{
     const arr =["meow", "Hi! how are you today?", "You're awesome", "Did you have your breakfast?" ]
     const random = arr[Math.floor(Math.random()* arr.length)]
@@ -53,11 +41,11 @@ const customers = [
 
 server.get("/customer", (req, res) => {
     res.status(200).json({customers: customers});
+// res.send("hello")
 })
 server.post("/create-message",(req,res)=>{
   const newCustomer = req.body
-})
-
+});
 
 const PORT = 8080 
 server.listen(PORT,() => console.log(`server running at port ${PORT}`))
